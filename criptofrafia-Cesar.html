@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Caesar Cipher</title>
+    <meta charset="UTF-8">
+    <style>
+        button {
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background-color: rgb(140, 151, 221);
+            border-color: rgb(0, 44, 94);
+        }
+
+        #big {
+            width: 100px;
+        }
+        h6{
+           color: rgb(92, 92, 92); 
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1>CIFRA DE CÉSAR</h1>
+    <h6>Usar apenas letras minúsculas e cifrar/descrifrar uma palavra de cada vez!</h6>
+    <span id="key">Criptografar</span><br>
+    <input type="text" id="input" />
+    <button onclick="calculate()" id="big">Calcular</button>
+    <span id="output"></span><br><br>
+    <span id="keyDesc">Descriptografar</span><br>
+    <input type="text" id="inputDesc" />
+    <button onclick="descrip()" id="big">Calcular</button>
+    <span id="outputDesc"></span>
+
+    <script>
+        var values = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+        var key = +document.getElementById("key").innerHTML;
+        
+        key = 3;
+        function calculate() {
+            var input = document.getElementById("input").value.toUpperCase();
+            var result = "";
+
+            for (var i = 0; i < input.length; i++) { 
+
+                var posicao = input.charCodeAt(i) - 64; 
+                var deslocamento = (posicao + key) % 26; 
+                deslocamento = deslocamento == 0 ? 26 : deslocamento; 
+                result += values[deslocamento - 1]; 
+            }
+
+            document.getElementById("output").innerHTML = result;
+        }
+        
+        var keyDesc = +document.getElementById("keyDesc").innerHTML;
+        keyDesc = 25;
+        function descrip() {
+            var inputDesc = document.getElementById("inputDesc").value.toUpperCase();
+            var resultD = "";
+
+            for (var i = 0; i < inputDesc.length; i++) { 
+
+                var posicao = inputDesc.charCodeAt(i) + 64; 
+                var deslocamento = (posicao + keyDesc) % 26; 
+                deslocamento = deslocamento == 0 ? 26 : deslocamento; 
+                resultD += values[deslocamento - 1]; 
+            }
+
+            document.getElementById("outputDesc").innerHTML = resultD;
+        }
+    </script>
+</body>
+
+</html>
